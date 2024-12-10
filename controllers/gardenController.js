@@ -1,14 +1,6 @@
-//const Garden = require("../models/garden");
+const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 
-// Display list of all Gardens for a User (GET)
-exports.garden_list = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Garden List");
-});
-// Display detail page for a specific Garden (GET)
-exports.garden_detail = asyncHandler(async(req, res, next) => {
-    res.send(`NOT IMPLEMENTED: Garden detail: ${req.params.id}`);
-});
 // Display Garden create form (GET)
 exports.garden_create_get = asyncHandler(async(req, res, next) => {
     res.send("NOT IMPLEMENTED: Garden create GET");
@@ -16,6 +8,14 @@ exports.garden_create_get = asyncHandler(async(req, res, next) => {
 // Handle Garden create (POST)
 exports.garden_create_post = asyncHandler(async(req, res, next) => {
     res.send("NOT IMPLEMENTED: Garden create POST");
+});
+// Display list of all Gardens for a User (GET)
+exports.garden_list = asyncHandler(async(req, res, next) => {
+    res.send("NOT IMPLEMENTED: Garden List");
+});
+// Display detail page for a specific Garden (GET)
+exports.garden_detail = asyncHandler(async(req, res, next) => {
+    res.send(`NOT IMPLEMENTED: Garden detail: ${req.params.id}`);
 });
 // Display Garden update form (GET)
 exports.garden_update_get = asyncHandler(async(req, res, next) => {
