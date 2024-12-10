@@ -9,7 +9,7 @@ exports.index = asyncHandler(async(req, res, next) => {
 exports.user_list = asyncHandler(async(req, res, next) => {
     res.send("NOT IMPLEMENTED: User List");
 });
-// Display detail page for a specific User
+// Display detail page for a specific User (GET)
 exports.user_detail = asyncHandler(async(req, res, next) => {
     res.send(`NOT IMPLEMENTED: User detail: ${req.params.id}`);
 });

@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 exports.garden_list = asyncHandler(async(req, res, next) => {
     res.send("NOT IMPLEMENTED: Garden List");
 });
-// Display detail page for a specific Garden
+// Display detail page for a specific Garden (GET)
 exports.garden_detail = asyncHandler(async(req, res, next) => {
     res.send(`NOT IMPLEMENTED: Garden detail: ${req.params.id}`);
 });
