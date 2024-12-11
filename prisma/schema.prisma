@@ -13,5 +13,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Users {
+  id      Int      @id @default(autoincrement())
+  username   String   @unique
+  password    String
+  gardens   Gardens[]
+}
 
+model Gardens {
+  id        Int      @id @default(autoincrement())
+  name     String   @db.VarChar(255)
+  plants    Plants[]
+  user    Users     @relation(fields: [user_id], references: [id])
+  user_id  Int
+}
+
+model Plants {
+  id     Int     @id @default(autoincrement())
+  common_name    String?
+  scientific_name     String
+  cycle    String?
+  watering    String?
+  sunlight    String[]
+  image_url    String?
+  indoor    Boolean? @default(false)
+  poisonous    Boolean? @default(false)
+  type    String?
+  dimensions_min    Float?
+  dimensions_max    Float?
+  dimensions_unit    String?
+  pruning_months    String[]
+  pruning_count_amount    Int?
+  pruning_count_interval    String?
+  hardiness_min    String?
+  hardiness_max    String?
+  flowering_season    String?
+  description    String?
+  growth_rate    String?
+  garden   Gardens    @relation(fields: [garden_id], references: [id])
+  garden_id    Int
+}
 

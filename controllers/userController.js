@@ -1,4 +1,4 @@
-const db = require("../db/queries");
+const db = require("../prisma/queries");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
