@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <%- include("navbar") %>
+    <div class="pageContainer">
+      <h1 class="title" id="welcomeTitle"><%= title %></h1>
+      <p class="welcomeHeading">Welcome to <%= title %></p>
+      <p class="welcomeText">Organise your gardens here</p>
+      <div class="backLinkDiv">
+        <a href="/planner/user/create" class="backLink">Create account</a>
+        <a href="/planner/user/login" class="backLink">Log in</a>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <%- include("navbar") %>
+    <div class="pageContainer">
+      <h1 class="title">Log in</h1>
+      <form id="login" action="/planner/user/login" method="post">
+        <div class="formInputsDiv">
+          <label class="loginLabel" for="username">Username</label>
+          <input id="username" name="username" type="text" class="loginInput" required autocomplete>
+          <label class="loginLabel" for="password">Password</label>
+          <input id="password" name="password" type="password" class="loginInput" required autocomplete>
+        </div>
+        <button type="submit" class="loginBtn">Log in</button>
+        <% if (message) { %>
+          <p class="message"><%= message %></p>
+        <% } %>
+      </form>
+      <a href="/planner/" class="cancelBtn">Cancel</a>
+    </div>
+  </body>
+</html>
