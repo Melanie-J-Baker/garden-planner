@@ -15,11 +15,26 @@ router.get("/user/create", user_controller.user_create_get);
 // Handle User create (POST)
 router.post("/user/create", user_controller.user_create_post);
 
-// Display list of all users (GET)
+// Display User login form (GET)
+router.get("/user/login", user_controller.user_login_get);
+
+// Handle User login (POST)
+router.post("/user/login", user_controller.user_login_post);
+
+// Logout confirmation on GET
+router.get("/user/logout/confirm", user_controller.user_logout_confirm_get);
+
+// Handle User log out on GET
+router.get("/user/logout", user_controller.user_logout_get);
+
+// Return details of all users (GET)
 router.get("/users", user_controller.user_list);
 
-// Display detail page for a specific User (GET)
+// Return details for a specific User (GET)
 router.get("/user/:id", user_controller.user_detail);
+
+// Display User details page (GET)
+router.get("/user/:id/home", user_controller.user_home_get);
 
 // Display User update form (GET)
 router.get("/user/:id/update", user_controller.user_update_get);

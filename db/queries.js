@@ -9,8 +9,13 @@ async function getAllUsers() {
     return rows;
 }
 
-async function getUser(id) {
+async function getUserByID(id) {
     const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    return rows;
+}
+
+async function getUserByUsername(username) {
+    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
     return rows;
 }
 
@@ -75,7 +80,8 @@ async function deletePlant(id) {
 module.exports = {
     createUser,
     getAllUsers,
-    getUser,
+    getUserByID,
+    getUserByUsername,
     updateUser,
     deleteUser,
     createGarden,
