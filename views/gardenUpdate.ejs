@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% if (currentUser) { %>
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Rename garden</title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+      <%- include("navbar") %>
+      <div class="pageContainer">
+        <h1 class="title"><span class="boldText">Rename</span> <%= garden.name %></h1>
+        <form id="updateGarden" action="/planner/garden/<%= garden.id %>/update" method="post">
+          <label class="updateGardenLabel" for="name">Name</label>
+          <input id="name" name="name" type="text" class="updateGardenInput" value="<%= garden.name %>" required autocomplete>
+          <button type="submit" class="updateGardenBtn">Rename Garden</button>
+          <% if (message) { %>
+            <p class="message"><%= message %></p>
+          <% } %>
+        </form>
+        <a href="/planner/garden/<%= garden.id %>" class="cancelBtn">Cancel</a>
+      </div>
+    </body>
+  <% } else { %>
+    <%- include("pageNotFound") %>
+  <% } %>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% if (currentUser) { %>
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title><%= garden.name %> Details</title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+      <%- include("navbar") %>
+      <div class="pageContainer">
+        <h1 class="title"><span class="boldText">Garden:</span> <%= garden.name %></h1>
+        <div class="gardenOptionsDiv">
+          <a href="/planner/user/<%= currentUser.id %>/plant/create" class="gardenOption">Add plant</a>
+          <div class="gardenOptions">
+            <a href="/planner/garden/<%= garden.id %>/update" class="gardenOption">Rename garden</a>
+            <a href="/planner/garden/<%= garden.id %>/delete" class="gardenOption">Delete garden</a>
+          </div>
+        </div>
+        <h3 class="plantsTitle">Plants</h3>
+        <% if (plants.length) { %>
+          <div class="plants">
+            <% plants.map((plant) => { %>
+              <div class="plant" id="<%= plant.id %>">
+                <a href="/planner/plant/<%= plant.id %>" class="plantLink plantListDetail"><%= plant.scientific_name %></a>
+                <p class="plantListDetail"><span class="boldText">Common name:</span> <%= plant.common_name %></p>
+                <p class="plantListDetail"><span class="boldText">Type:</span> <%= plant.type %></p>
+                <p class="plantListDetail"><span class="boldText">Cycle:</span> <%= plant.cycle %></p>
+                <a href="/planner/plant/<%= plant.id %>" class="plantLinkBtn">See details</a>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="noPlants">
+            <h1 class="noPlantsText">You do not have any plants in this garden yet</h1>
+          </div>
+        <% } %>
+        <a href="/planner/user/<%= currentUser.id %>/home" class="backLink">Back to home</a>
+      </div>
+    </body>
+  <% } else { %>
+      <%- include("pageNotFound") %>
+  <% } %>
+</html>

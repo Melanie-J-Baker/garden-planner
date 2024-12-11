@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% if (currentUser) { %>
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Add new garden</title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+      <%- include("navbar") %>
+      <div class="pageContainer">
+        <h1 class="title">Add new garden</h1>
+        <form id="createGarden" action="/planner/user/<%= currentUser.id %>/garden/create" method="post">
+          <label class="createGardenLabel" for="name">Garden Name</label>
+          <input id="name" name="name" type="text" class="createGardenInput" required autocomplete>
+          <button type="submit" class="createGardenBtn">Create Garden</button>
+          <% if (message) { %>
+            <p class="message"><%= message %></p>
+          <% } %>
+        </form>
+        <a href="/planner/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
+      </div>
+    </body>
+  <% } else { %>
+    <%- include("pageNotFound") %>
+  <% } %>
+</html>
