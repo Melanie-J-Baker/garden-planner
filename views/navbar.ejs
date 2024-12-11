@@ -1,0 +1,14 @@
+<nav>
+    <ul class="nav-ul">
+        <% if (!currentUser) { %>
+            <li><a href="/planner/user/login" class="navLink">Log in</a></li>
+            <li><a href="/planner/user/create" class="navLink">Create account</a></li>
+        <% } else { %>
+            <li><a href="/planner/user/<%= currentUser.id %>/home" class="navLink">Home</a></li>
+            <li><a href="/planner/user/<%= currentUser.id %>/update" class="navLink">Account</a></li>
+            <li><a href="/planner/user/<%= currentUser.id %>/garden/create" class="navLink">Add garden</a></li>
+            <li><a href="/planner/user/<%= currentUser.id %>/plant/create" class="navLink">Add plant</a></li>
+            <li><a href="/planner/user/logout/confirm" class="navLink">Log out</a></li>
+        <% } %>
+    </ul>
+</nav>

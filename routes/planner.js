@@ -77,10 +77,10 @@ router.post("/garden/:id/delete", garden_controller.garden_delete_post);
 // PLANT ROUTES
 
 // Display Plant create form (GET)
-router.get("/garden/:id/plant/create", plant_controller.plant_create_get);
+router.get("/user/:id/plant/create", plant_controller.plant_create_get);
 
 // Handle Plant create (POST)
-router.post("/garden/:id/plant/create", plant_controller.plant_create_post);
+router.post("/user/:id/plant/create", plant_controller.plant_create_post);
 
 // Display list of all Plants for a Garden (GET)
 router.get("/garden/:id/plants". plant_controller.plant_list);

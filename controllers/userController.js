@@ -132,7 +132,7 @@ exports.user_home_get = asyncHandler(async (req, res, next) => {
     try {
       const user = await db.getUserByID(parseInt(req.params.id));
       const gardens = await db.getAllGardens(parseInt(req.params.id));
-      res.render("userHomePage", { user, gardens });
+      res.render("userHome", { user, gardens });
     } catch (err) {
       renderErrorPage(res, err);
     }
