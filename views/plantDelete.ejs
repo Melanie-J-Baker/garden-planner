@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% if (currentUser) { %>
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Delete Plant</title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+      <%- include("navbar") %>
+      <div class="pageContainer">
+        <h1 class="title">Delete plant</h1>
+        <p class="plantNameTitle">Scientific Name:</p>
+        <p class="plantName"><%= plant.scientific_name %>...</p>
+        <p class="plantNameTitle">Common Name:</p>
+        <p class="plantName"><%= plant.common_name %></p>
+        <form id="plantDelete" action="/planner/plant/<%= plant.id %>/delete" method="post">
+            <button type="submit" class="plantDeleteBtn">Delete Plant</button>
+        </form>
+        <a href="/planner/plant/<%= plant.id %>" class="cancelBtn">Cancel</a>
+      </div>
+    </body>
+  <% } else { %>
+    <%- include("pageNotFound") %>
+  <% } %>
+</html>

@@ -66,6 +66,7 @@ exports.user_create_post = [
       await db.createUser({
         username: req.body.username,
         password: hashedPassword,
+        gardens: [],
       });
       // Redirect to login page
       res.render("userLogin", {
@@ -207,7 +208,7 @@ exports.user_delete_get = (req, res, next) => {
 exports.user_delete_post = asyncHandler(async(req, res, next) => {
   try {
     await db.deleteUser(parseInt(req.params.id));
-    res.render("accountDeleted");
+    res.render("userDeleted");
   } catch (err) {
     renderErrorPage(res, err);
   }

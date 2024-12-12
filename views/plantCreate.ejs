@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% if (currentUser) { %>
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Add Plant</title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <script src="/javascripts/setIsLoading.js" defer></script>
+    </head>
+    <body>
+      <%- include("navbar") %>
+      <div class="pageContainer">
+        <h1 class="title">Add Plant</h1>
+        <% if (gardens.length !== 0) { %>
+          <form id="plantCreate" action="/planner/user/<%= currentUser.id %>/plant/create" method="post">
+            <div class="inputDiv">
+              <label class="plantCreateLabel selectGardenLabel" for="garden_id">Select garden</label>
+              <select id="garden_id" name="garden_id" class="plantCreateInput" required>
+                <% gardens.map((garden) => { %>
+                  <option value="<%= garden.id %>"><%= garden.name %></option>
+                <% }) %>
+              </select>
+              <p class="addGardenText">Or <a href="/planner/user/<%= currentUser.id %>/garden/create" id="addGardenLink">create new garden</a></p>
+            </div>
+            <div class="inputDiv plantInputDiv">
+              <label class="plantCreateLabel selectPlantLabel" for="plant">Select plant: </label>
+              <select id="plant" name="plant" class="plantCreateInput" required >
+                <% plants.map((plant) => { %>
+                  <option value="<%= plant.id %>"><%= plant.scientific_name %> (<%= plant.common_name %>)</option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="plantCreateBtns">
+              <button type="submit" class="plantCreateBtn" onClick="setIsLoading()">Add Plant</button>
+              <a href="/planner/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
+            </div>
+            <div id="loading"></div>
+            <% if (message) { %>
+              <p class="message"><%= message %></p>
+            <% } %>
+          </form>
+        <% } else { %>
+          <h2 class="noGardensText">You do not have any gardens. Please create a garden before adding your first plant</h2>
+          <div class="plantCreateBtns">
+            <a href="/planner/user/<%= currentUser.id %>/garden/create" class="createGardenLink">Add garden</a>
+            <a href="/planner/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
+          </div>
+        <% } %>     
+      </div>
+    </body>
+  <% } else { %>
+    <%- include("pageNotFound") %>
+  <% } %>
+</html>

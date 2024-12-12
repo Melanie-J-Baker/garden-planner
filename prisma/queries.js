@@ -170,7 +170,7 @@ async function getPlantByID(id) {
 async function getPlantByName(name) {
     const plants = await prisma.plants.findMany({
         where: {
-          name: name,
+          scientific_name: name,
         },
     });
     return plants[0];

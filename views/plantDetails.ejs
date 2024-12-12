@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% if (currentUser) { %>
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title><%= plant.scientific_name %></title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+      <%- include("navbar") %>
+      <div class="pageContainer">
+        <h1 class="title">Plant details</h1>
+        <h2 class="scientificName"><%= plant.scientific_name %></h2>
+        <h3 class="commonName"><%= plant.common_name</h3>
+        <img src="<%= plant.image_url %>" class="plantImage" alt="Image of <%= plant.scientific_name %>">
+        <p class="plantDetail"><span class="boldText">Garden:</span> <%= garden.name %></p>
+        <p class="plantDetail"><span class="boldText">Type:</span> <%= plant.type %></p>
+        <p class="plantDetail"><span class="boldText">Cycle:</span> <%= plant.cycle %></p>
+        <p class="plantDetail"><span class="boldText">Watering:</span> <%= plant.watering %></p>
+        <p class="plantDetail"><span class="boldText">Sunlight:</span> <%= plant.sunlight.toString() %></p>
+        <p class="plantDetail"><span class="boldText">Indoor:</span> <% plant.indoor == true ? "Yes" : "No" %></p>
+        <p class="plantDetail"><span class="boldText">Poisonous:</span> <% plant.poisonous == true ? "Yes" : "No" %></p>
+        <p class="plantDetail"><span class="boldText">Dimensions:</span> <%= plant.dimensions_min %> to <%= plant.dimensions_max %> <%= plant.dimensions_unit %></p>
+        <p class="plantDetail"><span class="boldText">Pruning Months:</span> <%= plant.pruning_months.toString() %></p>
+        <p class="plantDetail"><span class="boldText">Pruning Frequency:</span> <%= plant.pruning_count_amount %> times a <%= plant.pruning_count_interval %></p>
+        <p class="plantDetail"><span class="boldText">Hardiness:</span> <%= plant.hardiness_min %>&deg;C to <%= plant.hardiness_max %>&deg;C</p>
+        <p class="plantDetail"><span class="boldText">Flowering Season:</span> <%= plant.flowering_season %></p>
+        <p class="plantDetail"><span class="boldText">Description:</span> <%= plant.description %></p>
+        <p class="plantDetail"><span class="boldText">Growth Rate:</span> <%= plant.growth_rate %></p>
+        <div class="plantOptions">
+          <a href="/planner/plant/<%= plant.id %>/update" class="updatePlant">Move plant</a>
+          <a href="/planner/plant/<%= plant.id %>/delete" class="deletePlant">Delete plant</a>
+        </div>
+        <% if (plant.garden_id) { %>
+          <a href="/planner/garden/<%= plant.garden_id %>" class="backLink">Back to garden</a>
+        <% } else { %>
+          <a href="/planner/user/<%= currentUser.id %>/home" class="backLink">Back to home</a>
+        <% } %>
+      </div>
+    </body>
+  <% } else { %>
+    <%- include("pageNotFound") %>
+  <% } %>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% if (currentUser) { %>
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Find Plant</title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <script src="/javascripts/setIsLoading.js" defer></script>
+    </head>
+    <body>
+      <%- include("navbar") %>
+      <div class="pageContainer">
+        <h1 class="title">Find Plant</h1>
+          <form id="plantSearch" action="/planner/user/<%= currentUser.id %>/plant/search" method="post">
+            <div class="inputDiv">
+              <label class="plantSearchLabel" for="plant">Search for plant by common or scientific (latin) name: </label>
+              <input id="plant" name="plant" type="search" class="plantSearchInput" required />
+            </div>
+            <div class="plantSearchBtns">
+              <button type="submit" class="plantSearchBtn" onClick="setIsLoading()">Find Plant</button>
+              <a href="/planner/user/<%= currentUser.id %>/home" class="cancelBtn">Cancel</a>
+            </div>
+            <div id="loading"></div>
+            <% if (message) { %>
+              <p class="message"><%= message %></p>
+            <% } %>
+          </form>
+      </div>
+    </body>
+  <% } else { %>
+    <%- include("pageNotFound") %>
+  <% } %>
+</html>

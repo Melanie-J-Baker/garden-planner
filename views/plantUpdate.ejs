@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% if (currentUser) { %>
+    <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Move plant</title>
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+      <%- include("navbar") %>
+      <div class="pageContainer">
+        <h1 class="title"><span class="boldText">Move plant:</span> <%= plant.scientific_name %> </h1>
+        <form id="plantUpdate" action="/planner/plant/<%= plant.id %>/update" method="post">
+          <label class="plantUpdateLabel" for="garden_select">Select garden</label>
+          <select id="garden_select" name="garden_id">
+            <% gardens.map((garden) => { %>
+              <% if (garden.id === plant.garden_id) { %>
+                <option value="<%= garden.id %>" selected><%= garden.name %></option>
+              <% } else { %>
+                <option value="<%= garden.id %>"><%= garden.name %></option>
+              <% } %>
+            <% }) %>
+          </select>
+          <button type="submit" class="plantUpdateBtn">Move Plant</button>
+          <% if (message) { %>
+            <p class="message"><%= message %></p>
+          <% } %>
+        </form>
+        <a href="/planner/plant/<%= plant.id %>" class="cancelBtn">Cancel</a>
+      </div>
+    </body>
+    <% } else { %>
+      <%- include("pageNotFound") %>
+    <% } %>
+</html>

@@ -9,9 +9,43 @@ exports.garden_create_get = (req, res, next) => {
   }
 
 // Handle Garden create (POST)
-exports.garden_create_post = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Garden create POST");
-});
+exports.garden_create_post = [
+  body("name")
+    .trim()
+    .isLength({ min: 1, max: 100 })
+    .escape()
+    .withMessage("Name must be provided. Maximum 100 characters"),
+  // Process request after validation and sanitisation
+  asyncHandler(async (req, res, next) => {
+    // Extract validation errors from a request
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("gardenCreate", {
+        message: errors
+          .array()
+          .map((err) => err.msg)
+          .join(", "),
+      });
+    }
+    try {
+      const user_id = parseInt(req.params.id);
+      const gardenExists = await db.getGardenByName(req.body.name);
+      if (gardenExists) {
+        return res.render("gardenCreate", {
+          message: "A garden with that name already exists",
+        });
+      }
+      const newGarden = await db.createGarden({
+        name: req.body.name,
+        user_id: user_id,
+        plants: [],
+      });
+      res.redirect(`/planner/garden/${newGarden.id}`);
+    } catch (err) {
+      renderErrorPage(res, err);
+    }
+  }),
+];
 
 // Display list of all Gardens for a User (GET)
 exports.garden_list = asyncHandler(async(req, res, next) => {
@@ -55,7 +89,7 @@ exports.garden_update_post = [
       .trim()
       .isLength({ min: 1, max: 100 })
       .escape()
-      .withMessage("Name for garden must be provided. Maximum 100 characters"),
+      .withMessage("Name must be provided. Maximum 100 characters"),
     // Process request after validation and sanitisation
     asyncHandler(async (req, res, next) => {
       const garden = await db.getGardenByID(parseInt(req.params.id));
